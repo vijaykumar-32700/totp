@@ -65,7 +65,7 @@ async function updateTOTP() {
 
     // Generate code
     const code = await generateHOTP(SECRET, counter);
-    
+
     // Update UI
     updateDisplay(code);
     updateTimer(secondsLeft, step);
@@ -75,8 +75,10 @@ function updateDisplay(code) {
     const container = document.getElementById('totp-code');
     const firstPart = code.substring(0, 3);
     const secondPart = code.substring(3, 6);
-    
-    // Simple update for now, could be animated
+
+    // Preserve tooltip element if it exists, otherwise re-add it
+    const tooltipHtml = '<span class="copy-tooltip" id="copy-tooltip">Copied!</span>';
+
     container.innerHTML = `
         <span class="digit">${firstPart[0]}</span>
         <span class="digit">${firstPart[1]}</span>
@@ -85,17 +87,54 @@ function updateDisplay(code) {
         <span class="digit">${secondPart[0]}</span>
         <span class="digit">${secondPart[1]}</span>
         <span class="digit">${secondPart[2]}</span>
+        ${tooltipHtml}
     `;
+
+    // Store code in dataset for easy access
+    container.dataset.code = code;
+}
+
+// Add click listener for copying
+document.getElementById('totp-code').addEventListener('click', async function () {
+    const code = this.dataset.code;
+    if (!code) return;
+
+    try {
+        await navigator.clipboard.writeText(code);
+        showTooltip();
+    } catch (err) {
+        // Fallback for older browsers or file:// protocol restrictions
+        const textArea = document.createElement("textarea");
+        textArea.value = code;
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            showTooltip();
+        } catch (err) {
+            console.error('Copy failed', err);
+            alert('Failed to copy: ' + code);
+        }
+        document.body.removeChild(textArea);
+    }
+});
+
+function showTooltip() {
+    const tooltip = document.getElementById('copy-tooltip');
+    tooltip.classList.add('show');
+    setTimeout(() => {
+        tooltip.classList.remove('show');
+    }, 1500);
 }
 
 function updateTimer(secondsLeft, totalSeconds) {
     const progressCircle = document.getElementById('timer-progress');
     const timerText = document.getElementById('timer-text');
     const statusText = document.getElementById('seconds-left');
-    
+
     const circumference = 2 * Math.PI * 45; // r=45
     const offset = circumference - (secondsLeft / totalSeconds) * circumference;
-    
+
     progressCircle.style.strokeDashoffset = offset;
     timerText.textContent = secondsLeft;
     statusText.textContent = secondsLeft;

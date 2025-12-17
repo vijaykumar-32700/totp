@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <div class="background-blobs">
         <div class="blob blob-1"></div>
@@ -24,10 +26,11 @@
             </header>
 
             <div class="totp-display">
-                <div class="code-container" id="totp-code">
+                <div class="code-container" id="totp-code" title="Click to copy">
                     <span class="digit">0</span><span class="digit">0</span><span class="digit">0</span>
                     <span class="separator"> </span>
                     <span class="digit">0</span><span class="digit">0</span><span class="digit">0</span>
+                    <span class="copy-tooltip" id="copy-tooltip">Copied!</span>
                 </div>
                 <div class="timer-container">
                     <svg class="timer-svg" viewBox="0 0 100 100">
@@ -47,4 +50,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>

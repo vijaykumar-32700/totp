@@ -74,9 +74,19 @@ body {
 }
 
 @keyframes float {
-    0%, 100% { transform: translate(0, 0); }
-    33% { transform: translate(30px, -50px); }
-    66% { transform: translate(-20px, 20px); }
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    33% {
+        transform: translate(30px, -50px);
+    }
+
+    66% {
+        transform: translate(-20px, 20px);
+    }
 }
 
 /* Main Card */
@@ -136,6 +146,38 @@ body {
     justify-content: center;
     align-items: center;
     gap: 5px;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    transition: transform 0.1s ease;
+}
+
+.code-container:active {
+    transform: scale(0.98);
+}
+
+.copy-tooltip {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%) scale(0.8);
+    background: rgba(16, 185, 129, 0.9);
+    /* Emerald green */
+    color: white;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.copy-tooltip.show {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+    top: -50px;
 }
 
 .separator {
@@ -166,7 +208,8 @@ body {
     stroke: var(--timer-color);
     stroke-width: 6;
     stroke-linecap: round;
-    stroke-dasharray: 283; /* 2 * PI * 45 */
+    stroke-dasharray: 283;
+    /* 2 * PI * 45 */
     stroke-dashoffset: 0;
     transition: stroke-dashoffset 1s linear;
 }
@@ -206,9 +249,17 @@ body {
 }
 
 @keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.5; }
-    100% { opacity: 1; }
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 /* Responsive */
