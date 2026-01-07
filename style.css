@@ -1,11 +1,17 @@
 :root {
-    --bg-color: #0f172a;
-    --card-bg: rgba(30, 41, 59, 0.7);
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --accent-color: #38bdf8;
-    --accent-glow: rgba(56, 189, 248, 0.5);
-    --timer-color: #22d3ee;
+    --bg-color: #0c0a09;
+    /* Stone 950 */
+    --card-bg: rgba(28, 25, 23, 0.95);
+    /* Stone 950 (high opacity) */
+    --text-primary: #d6d3d1;
+    /* Stone 300 */
+    --text-secondary: #78716c;
+    /* Stone 500 */
+    --accent-color: #d97706;
+    /* Amber 600 */
+    --accent-glow: rgba(217, 119, 6, 0.2);
+    --timer-color: #ea580c;
+    /* Orange 600 */
     --font-family: 'Outfit', sans-serif;
 }
 
@@ -42,14 +48,15 @@ body {
     position: absolute;
     border-radius: 50%;
     filter: blur(80px);
-    opacity: 0.4;
+    opacity: 0.15;
     animation: float 20s infinite ease-in-out;
 }
 
 .blob-1 {
     width: 400px;
     height: 400px;
-    background: #4f46e5;
+    background: #ea580c;
+    /* Orange 600 */
     top: -100px;
     left: -100px;
     animation-delay: 0s;
@@ -58,7 +65,8 @@ body {
 .blob-2 {
     width: 300px;
     height: 300px;
-    background: #06b6d4;
+    background: #d97706;
+    /* Amber 600 */
     bottom: -50px;
     right: -50px;
     animation-delay: -5s;
@@ -67,7 +75,8 @@ body {
 .blob-3 {
     width: 250px;
     height: 250px;
-    background: #ec4899;
+    background: #be123c;
+    /* Rose 700 */
     top: 40%;
     left: 60%;
     animation-delay: -10s;
@@ -267,4 +276,46 @@ body {
     .code-container {
         font-size: 2.5rem;
     }
+}
+
+/* AWS Button */
+.aws-login-container {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.aws-btn {
+    background: linear-gradient(135deg, #FF9900 0%, #FFC107 100%);
+    color: #232f3e;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: var(--font-family);
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    width: 100%;
+    box-shadow: 0 4px 6px -1px rgba(255, 153, 0, 0.3);
+    text-decoration: none;
+}
+
+.aws-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(255, 153, 0, 0.4);
+    filter: brightness(1.1);
+}
+
+.aws-btn:active {
+    transform: translateY(0);
+}
+
+.btn-text {
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
 }

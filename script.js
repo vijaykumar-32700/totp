@@ -153,3 +153,32 @@ setInterval(() => {
     // Re-calculate everything every second to stay synced
     updateTOTP();
 }, 1000);
+
+// AWS Button Logic
+const awsBtn = document.getElementById('aws-btn');
+if (awsBtn) {
+    awsBtn.addEventListener('click', async function (e) {
+        // Prevent default if it was a link/form submit (it is a button, but good practice)
+        e.preventDefault();
+
+        const email = this.dataset.email;
+        const textSpan = this.querySelector('.btn-text');
+        const originalText = textSpan.textContent;
+
+        // Optimize: Copy to clipboard
+        try {
+            await navigator.clipboard.writeText(email);
+            // Visual feedback
+            textSpan.textContent = "Email Copied!";
+
+            setTimeout(() => {
+                textSpan.textContent = originalText;
+            }, 2000);
+        } catch (err) {
+            console.error('Failed to copy email', err);
+        }
+
+        // Open AWS Console in new tab
+        window.open('https://signin.aws.amazon.com/signin?client_id=arn%3Aaws%3Asignin%3A%3A%3Aconsole%2Fcanvas&redirect_uri=https%3A%2F%2Fconsole.aws.amazon.com%2Fconsole%2Fhome%3Fca-oauth-flow-id%3Df81c%26hashArgs%3D%2523%26isauthcode%3Dtrue%26nc2%3Dh_si%26src%3Dheader-signin%26state%3DhashArgsFromTB_eu-north-1_834b5ff8ff19d36d&page=resolve&code_challenge=UCLxQLPUAw6dDVpXm3Igt5A22uNXxa_7DqtYchRAAdM&code_challenge_method=SHA-256&backwards_compatible=true', '_blank');
+    });
+}
